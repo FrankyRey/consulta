@@ -1,0 +1,26 @@
+{% extends '@AdminLTE/FOSUserBundle/Security/login.html.twig' %}
+
+{% block title %}UDAL Online | Iniciar sesión{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block page_stylesheets %}
+	<style>
+		.login-box{
+			margin: 0% auto;
+		}
+		.login-logo{
+			margin-bottom: 15px !important;
+		}
+	</style>
+{% endblock %}
+
+{% block logo_login %}
+    <p><img class="logo" src="{{ asset('build/images/logo.png') }}" style="width: 50%;"></p>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
