@@ -30,10 +30,18 @@
         }
 
         /**
-         * @Route("/admin/profile", name="profile")
+         * @Route("/portal/profile", name="profile")
          */
         public function profile()
         {
             return $this->render('bundles/FOSUserBundle/layout.html.twig');
+        }
+
+        /**
+         * @Route("/portal/paypal", name="paypal")
+         */
+        public function paypal()
+        {
+            return $this->render('paypal.html.twig');
         }
     }

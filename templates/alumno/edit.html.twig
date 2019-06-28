@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Alumno{% endblock %}
+
+{% block stylesheets_page %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css" integrity="sha256-ikw4zfRFBqwF4UfeTqXBKsiCLtOSOD0XWliIEpPLO2M=" crossorigin="anonymous" />
+{% endblock %}
+
+{% block page_title %}
+    Editar Alumno
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel-content">
+    					{{ include('alumno/_form.html.twig', {'button_label': 'Update'}) }}
+    					<br/>
+    					{{ include('alumno/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js" integrity="sha256-OLaRYiuHs2MI4UUBtEgS3h2/88KzBApHNvbxEbEylAo=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.es.js" integrity="sha256-A6PTYXwi1bu9hL/e3qb2DmucaJBdARh8Z76XjK3k+4c=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#alumno').addClass('active');
+        });
+    </script>
+{% endblock %}

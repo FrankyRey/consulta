@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seguimiento{% endblock %}
+
+{% block page_title %}
+    Alumnos Inscritos
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Matricula</th>
+                                        <th>Nombre Completo</th>
+                                        <th>CURP</th>
+                                        <th>Fecha de Alta</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for alumno in alumnos %}
+                                    <tr>
+                                        <td>{{ alumno.matricula }}</td>
+                                        <td>{{ alumno.apellidoPaterno }} {{ alumno.apellidoMaterno }} {{ alumno.nombre }}</td>
+                                        <td>{{ alumno.curp }}</td>
+                                        <td>{{ alumno.fechaAlta|date("d/m/Y") }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('seguimiento_historial', {'matricula': alumno.matricula}) }}">
+                                                Ver Historial
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

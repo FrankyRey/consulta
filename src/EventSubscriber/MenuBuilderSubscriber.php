@@ -18,15 +18,34 @@ class MenuBuilderSubscriber implements EventSubscriberInterface
     
     public function onSetupMenu(SidebarMenuEvent $event)
     {
-        $blog = new MenuItemModel('blogId', 'Blog', 'profile', [], 'fas fa-tachometer-alt');
+        $home = new MenuItemModel('home', 'Inicio', 'home', [], 'fas fa-home');
+        $alumno = new MenuItemModel('alumno', 'Alumnos', 'alumno_index', [], 'fas fa-user-graduate');
+        $expediente = new MenuItemModel('expediente', 'Expedientes', 'expediente_index', [], 'far fa-folder-open');
+        $seguimiento = new MenuItemModel('seguimiento', 'Seguimiento', 'seguimiento_index', [], 'far fa-paper-plane');
+        $paypal = new MenuItemModel('paypal', 'Pagar PayPal', 'paypal', [], 'fab fa-paypal');
+        $catalogos = new MenuItemModel('catalogos', 'Catálogos', [], [], 'fas fa-cogs');
     
-        $blog->addChild(
-            new MenuItemModel('ChildOneItemId', 'ChildOneDisplayName', 'profile', [], 'fas fa-rss-square')
+        $catalogos->addChild(
+            new MenuItemModel('nivelAcademico', 'Niveles Académicos', 'nivel_academico_index', [])
         )->addChild(
-            new MenuItemModel('ChildTwoItemId', 'ChildTwoDisplayName', 'profile')
-        );
+            new MenuItemModel('ofertaAcademica', 'Oferta Académica', 'oferta_academica_index', [])
+        )->addChild(
+            new MenuItemModel('tipoCorreo', 'Tipos de Correo', 'tipo_correo_index', [])
+        )->addChild(
+            new MenuItemModel('documento', 'Documentos', 'documento_index', [])
+        )->addChild(
+            new MenuItemModel('estatusDocumento', 'Estatus de Documentos', 'estatus_documento_index', [])
+        )->addChild(
+            new MenuItemModel('conceptoPago', 'Conceptos de Pago', 'concepto_pago_index', [])
+        )
+        ;
         
-        $event->addItem($blog);
+        $event->addItem($home);
+        $event->addItem($alumno);
+        $event->addItem($expediente);
+        $event->addItem($seguimiento);
+        $event->addItem($paypal);
+        $event->addItem($catalogos);
 
         $this->activateByRoute(
             $event->getRequest()->get('_route'),

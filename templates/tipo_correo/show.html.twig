@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tipo de Correo{% endblock %}
+
+{% block page_title %}
+    Detalle Tipo de Correo Electrónico
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ tipo_correo.idTipoCorreo }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <td>{{ tipo_correo.nombreTipoCorreo }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-info" href="{{ path('tipo_correo_index') }}">
+                            <span>
+                                <i class="fas fa-list"></i>
+                            </span>
+                            <span>
+                                Ver todos
+                            </span>
+                        </a>
+    
+                        <a class="btn btn-info" href="{{ path('tipo_correo_edit', {'idTipoCorreo': tipo_correo.idTipoCorreo}) }}">
+                            <span>
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span>
+                                Editar
+                            </span>
+                        </a>
+                        <br/>
+
+                        {{ include('tipo_correo/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#catalogos').addClass('active treeview menu-open');
+            $('#tipoCorreo').addClass('active');
+        });
+    </script>
+{% endblock %}

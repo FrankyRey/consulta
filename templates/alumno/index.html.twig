@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alumnos{% endblock %}
+
+{% block page_title %}
+    Alumnos Pre Inscritos
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Matricula</th>
+                                        <th>Apellido Paterno</th>
+                                        <th>Apellido Materno</th>
+                                        <th>Nombre</th>
+                                        <th>CURP</th>
+                                        <th>Edad</th>
+                                        <th>Fecha de Nacimiento</th>
+                                        <th>Sexo</th>
+                                        <th>Correo Electrónico</th>
+                                        <th>Telefono Fijo</th>
+                                        <th>Telefono Celular</th>
+                                        <th>Fecha Alta</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for alumno in alumnos %}
+                                    <tr>
+                                        <td>{{ alumno.matricula }}</td>
+                                        <td>{{ alumno.apellidoPaterno }}</td>
+                                        <td>{{ alumno.apellidoMaterno }}</td>
+                                        <td>{{ alumno.nombre }}</td>
+                                        <td>{{ alumno.curp }}</td>
+                                        <td>{{ alumno.edad }}</td>
+                                        <td>{{ alumno.fechaNacimiento ? alumno.fechaNacimiento|date('d/m/Y') : '' }}</td>
+                                        <td>{{ alumno.sexo }}</td>
+                                        <td>{{ alumno.correoElectronico }}</td>
+                                        <td>{{ alumno.telefonoFijo }}</td>
+                                        <td>{{ alumno.telefonoCelular }}</td>
+                                        <td>{{ alumno.fechaAlta ? alumno.fechaAlta|date('d/m/Y') : '' }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('alumno_show', {'matricula': alumno.matricula}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('alumno_edit', {'matricula': alumno.matricula}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="13">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('alumno_new') }}">Agregar Nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

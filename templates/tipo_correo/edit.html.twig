@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Tipo de Correo{% endblock %}
+
+{% block page_title %}
+    Editar Tipo de Correo Electrónico
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel-content">
+    					{{ include('tipo_correo/_form.html.twig', {'button_label': 'Actualizar', 'button_icon': 'fas fa-sync-alt'}) }}
+    					<br/>
+    					{{ include('tipo_correo/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#catalogos').addClass('active treeview menu-open');
+            $('#tipoCorreo').addClass('active');
+        });
+    </script>
+{% endblock %}

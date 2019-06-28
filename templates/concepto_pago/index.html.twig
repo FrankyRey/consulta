@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conceptos de Pago{% endblock %}
+
+{% block page_title %}
+    Conceptos de Pago
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre del Concepto de Pago</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for concepto_pago in concepto_pagos %}
+                                    <tr>
+                                        <td>{{ concepto_pago.idConceptoPago }}</td>
+                                        <td>{{ concepto_pago.nombreConceptoPago }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('concepto_pago_show', {'idConceptoPago': concepto_pago.idConceptoPago}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('concepto_pago_edit', {'idConceptoPago': concepto_pago.idConceptoPago}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('concepto_pago_new') }}">Agregar nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

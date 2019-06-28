@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tipos de Correo{% endblock %}
+
+{% block page_title %}
+    Tipos de Correo Electrónico
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Tipo de Correo Electrónico</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for tipo_correo in tipo_correos %}
+                                    <tr>
+                                        <td>{{ tipo_correo.idTipoCorreo }}</td>
+                                        <td>{{ tipo_correo.nombreTipoCorreo }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('tipo_correo_show', {'idTipoCorreo': tipo_correo.idTipoCorreo}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('tipo_correo_edit', {'idTipoCorreo': tipo_correo.idTipoCorreo}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('tipo_correo_new') }}">Agregar Nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

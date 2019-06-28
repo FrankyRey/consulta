@@ -25,4 +25,9 @@ class User extends BaseUser
         $this->addRole("ROLE_USER");
         // your own logic
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 }

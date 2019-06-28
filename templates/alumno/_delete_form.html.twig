@@ -1,0 +1,12 @@
+<form method="post" action="{{ path('alumno_delete', {'matricula': alumno.matricula}) }}" onsubmit="return confirm('¿Realmente desea eliminar?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ alumno.matricula) }}">
+    <button class="btn btn-danger">
+        <span>
+            <i class="far fa-trash-alt"></i>
+        </span>
+        <span>
+            Eliminar
+        </span>
+    </button>
+</form>

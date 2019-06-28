@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <a class="btn btn-info" href="{{ path('tipo_correo_index') }}">
+        <span>
+            <i class="fas fa-list"></i>
+        </span>
+        <span>
+            Ver todos
+        </span>
+    </a>
+    <button class="btn btn-primary">
+        <span>
+            <i class="{{ button_icon|default('far fa-save') }}"></i>
+        </span>
+        <span>
+            {{ button_label|default('Guardar') }}
+        </span>
+{{ form_end(form) }}

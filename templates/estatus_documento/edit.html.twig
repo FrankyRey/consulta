@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Estatus de Documentos{% endblock %}
+
+{% block page_title %}
+    Editar Estatus de Documentos
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel-content">
+						{{ include('estatus_documento/_form.html.twig', {'button_label': 'Actualizar', 'button_icon': 'fas fa-sync-alt'}) }}
+    					<br/>
+    					{{ include('estatus_documento/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#catalogos').addClass('active treeview menu-open');
+            $('#estatusDocumento').addClass('active');
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seguimiento{% endblock %}
+
+{% block page_title %}
+    Expediente
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                Matrícula:
+                            </div>
+                            <div clasS="col-md-10">
+                                {{ alumno.matricula }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                CURP:
+                            </div>
+                            <div clasS="col-md-10">
+                                {{ alumno.curp }}
+                            </div>
+                        </div>
+                        <div class="row top5">
+                            <div class="col-md-2">
+                                Nombre completo:
+                            </div>
+                            <div clasS="col-md-10">
+                                {{ alumno.nombre }} {{ alumno.apellidoPaterno }} {{ alumno.apellidoMaterno }}
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Documento</th>
+                                        <th>Estatus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% set count = 1 %}
+                                {% for documento in documentos %}
+                                    <tr>
+                                        <td>{{ count }}</td>
+                                        <td>{{ documento.idDocumento.nombreDocumento }}</td>
+                                        <td>{{ documento.idEstatusDocumento.nombreEstatusDocumento}}</td>
+                                    </tr>
+                                    {% set count = count+1 %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-info" href="{{ path('expediente_index') }}">
+                            Ver Alumnos
+                        </a>
+                        <a class="btn btn-primary" href="{{ path('documentos_new', {'matricula': alumno.matricula}) }}">
+                            Agregar Documento
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#expediente').addClass('active');
+        });
+    </script>
+{% endblock %}

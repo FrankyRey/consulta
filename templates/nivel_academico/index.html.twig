@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Niveles Académicos{% endblock %}
+
+{% block page_title %}
+    Niveles Académicos
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel-content">
+						<div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nivel Académico</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for nivel_academico in nivel_academicos %}
+                                    <tr>
+                                        <td>{{ nivel_academico.idNivelAcademico }}</td>
+                                        <td>{{ nivel_academico.nombreNivelAcademico }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('nivel_academico_show', {'idNivelAcademico': nivel_academico.idNivelAcademico}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('nivel_academico_edit', {'idNivelAcademico': nivel_academico.idNivelAcademico}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('nivel_academico_new') }}">Agregar nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
