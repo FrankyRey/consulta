@@ -8,6 +8,10 @@
     <img src="{{ asset('build/images/logo.png') }}" width="100" />
 {% endblock %}
 
+{% block logo_mini %}
+    <img src="{{ asset('build/images/logo_small.png') }}" width="40" />
+{% endblock %}
+
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}

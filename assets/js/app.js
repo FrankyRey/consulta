@@ -9,6 +9,8 @@
 //require('../css/app.css');
 require('../../vendor/kevinpapst/adminlte-bundle/Resources/assets/admin-lte');
 require('../images/logo.png');
+require('../images/logo_small.png');
+require('../images/logo_completo.png');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');

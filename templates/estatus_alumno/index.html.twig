@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estatus del Alumno{% endblock %}
+
+{% block page_title %}
+    Estatus del Alumno
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Estatus del Alumno</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for estatus_alumno in estatus_alumnos %}
+                                    <tr>
+                                        <td>{{ estatus_alumno.idEstatusAlumno }}</td>
+                                        <td>{{ estatus_alumno.nombreEstatusAlumno }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('estatus_alumno_show', {'idEstatusAlumno': estatus_alumno.idEstatusAlumno}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('estatus_alumno_edit', {'idEstatusAlumno': estatus_alumno.idEstatusAlumno}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('estatus_alumno_new') }}">Agregar nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

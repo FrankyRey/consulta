@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Alumno;
 use App\Entity\NivelAcademico;
 use App\Entity\OfertaAcademica;
+use App\Entity\EstatusAlumno;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -64,6 +65,11 @@ class AlumnoType extends AbstractType
             ->add('idOfertaAcademica', EntityType::class, [
                 'class' => OfertaAcademica::class,
                 'choice_label' => 'nombreOfertaAcademica',
+                'placeholder' => '--Seleccione--'
+            ])
+            ->add('idEstatusAlumno', EntityType::class, [
+                'class' => EstatusAlumno::class,
+                'choice_label' => 'nombreEstatusAlumno',
                 'placeholder' => '--Seleccione--'
             ])
         ;

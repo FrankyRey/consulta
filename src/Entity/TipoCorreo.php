@@ -28,6 +28,13 @@ class TipoCorreo
      */
     private $nombreTipoCorreo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="template", type="string", length=50, nullable=true)
+     */
+    private $template;
+
     public function getIdTipoCorreo(): ?int
     {
         return $this->idTipoCorreo;
@@ -41,6 +48,18 @@ class TipoCorreo
     public function setNombreTipoCorreo(string $nombreTipoCorreo): self
     {
         $this->nombreTipoCorreo = $nombreTipoCorreo;
+
+        return $this;
+    }
+
+    public function getTemplate(): ?string
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(string $template): self
+    {
+        $this->template = $template;
 
         return $this;
     }

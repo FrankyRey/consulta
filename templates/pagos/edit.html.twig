@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Pago{% endblock %}
+
+{% block page_title %}
+    Editar Pago
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel-content">
+                        {{ include('pagos/_form.html.twig', {'button_label': 'Actualizar', 'button_icon': 'fas fa-sync-alt'}) }}
+                        <br/>
+                        {{ include('pagos/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#pagos').addClass('active');
+        });
+    </script>
+{% endblock %}

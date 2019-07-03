@@ -24,21 +24,21 @@ class Pago
     /**
      * @var string
      *
-     * @ORM\Column(name="mes", type="string", length=20, nullable=false)
+     * @ORM\Column(name="mes", type="string", length=20, nullable=true)
      */
     private $mes;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="anio", type="integer", nullable=false)
+     * @ORM\Column(name="anio", type="integer", nullable=true)
      */
     private $anio;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cantidad", type="decimal", precision=5, scale=2, nullable=false)
+     * @ORM\Column(name="cantidad", type="decimal", precision=8, scale=2, nullable=false)
      */
     private $cantidad;
 
@@ -48,6 +48,16 @@ class Pago
      * @ORM\Column(name="fecha_pago", type="date", nullable=false)
      */
     private $fechaPago;
+
+    /**
+     * @var \ConceptoPago
+     *
+     * @ORM\ManyToOne(targetEntity="ConceptoPago")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_concepto", referencedColumnName="id_concepto_pago")
+     * })
+     */
+    private $idConcepto;
 
     /**
      * @var \Alumno
@@ -60,9 +70,9 @@ class Pago
     private $alumnoMatricula;
 
     /**
-     * @var \FosUser
+     * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="FosUser")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
      * })
@@ -122,6 +132,18 @@ class Pago
         return $this;
     }
 
+    public function getIdConcepto(): ?ConceptoPago
+    {
+        return $this->idConcepto;
+    }
+
+    public function setIdConcepto(?ConceptoPago $idConcepto): self
+    {
+        $this->idConcepto = $idConcepto;
+
+        return $this;
+    }
+
     public function getAlumnoMatricula(): ?Alumno
     {
         return $this->alumnoMatricula;
@@ -134,12 +156,12 @@ class Pago
         return $this;
     }
 
-    public function getIdUser(): ?FosUser
+    public function getIdUser(): ?User
     {
         return $this->idUser;
     }
 
-    public function setIdUser(?FosUser $idUser): self
+    public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
 

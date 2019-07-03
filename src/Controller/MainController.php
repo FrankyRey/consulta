@@ -3,11 +3,12 @@
     //Librerias Symfony
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\Routing\Annotation\Route;
-    use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
-    use Doctrine\ORM\EntityManagerInterface;
+    use Symfony\Component\HttpFoundation\Response;
 
     //Entidades
+    use App\Entity\OfertaAcademica;
+    use App\Entity\Alumno;
 
     //Tipos de Entrada de datos
 
@@ -43,5 +44,23 @@
         public function paypal()
         {
             return $this->render('paypal.html.twig');
+        }
+
+        /**
+         * @Route("/portal/inscritos/{idOfertaAcademica}", name="inscritos", methods={"GET"})
+         */
+        public function inscritos(OfertaAcademica $ofertaAcademica)
+        {
+            $alumnos = $this->getDoctrine()
+                ->getRepository(Alumno::class)
+                ->findBy([
+                    'idOfertaAcademica' => $ofertaAcademica->getIdOfertaAcademica(),
+                ]);
+
+            return $this->render('inscritos/index.html.twig', [
+                'alumnos' => $alumnos,
+                'expandir' => 'maestria',
+                'activo' => '1mas',
+            ]);
         }
     }
