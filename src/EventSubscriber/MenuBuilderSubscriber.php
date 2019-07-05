@@ -21,6 +21,7 @@ class MenuBuilderSubscriber extends AbstractController implements EventSubscribe
     
     public function onSetupMenu(SidebarMenuEvent $event)
     {
+        $user = $this->getUser();
         $licenciaturasO = $this->getDoctrine()
             ->getRepository(OfertaAcademica::class)
             ->findBy([
@@ -41,8 +42,8 @@ class MenuBuilderSubscriber extends AbstractController implements EventSubscribe
         $pagos = new MenuItemModel('pagos', 'Pagos', 'pagos_index', [], 'fas fa-dollar-sign');
         $paypal = new MenuItemModel('paypal', 'Pagar PayPal', 'paypal', [], 'fab fa-paypal');
         $catalogos = new MenuItemModel('catalogos', 'Catálogos', [], [], 'fas fa-cogs');
-        $maestrias = new MenuItemModel('maestrias', 'Maestrías', [], []);
-        $licenciaturas = new MenuItemModel('licenciaturas', 'Licenciaturas', [], []);
+        $maestrias = new MenuItemModel('2', 'Maestrías', [], []);
+        $licenciaturas = new MenuItemModel('1', 'Licenciaturas', [], []);
         
         if($licenciaturasO)
         {
@@ -66,14 +67,14 @@ class MenuBuilderSubscriber extends AbstractController implements EventSubscribe
         foreach ($maestriasO as $mas)
         {
             $maestrias->addChild(
-                new MenuItemModel($mas->getIdOfertaAcademica().'mas', $mas->getNombreOfertaAcademica(), 'inscritos', ['idOfertaAcademica' => $mas->getIdOfertaAcademica()])
+                new MenuItemModel($mas->getIdNivelAcademico()->getIdNivelAcademico().$mas->getIdOfertaAcademica(), $mas->getNombreOfertaAcademica(), 'inscritos', ['idOfertaAcademica' => $mas->getIdOfertaAcademica()])
             );
         }
 
         foreach ($licenciaturasO as $lic)
         {
             $licenciaturas->addChild(
-                new MenuItemModel($lic->getIdOfertaAcademica().'lic', $lic->getNombreOfertaAcademica(), 'inscritos', ['idOfertaAcademica' => $lic->getIdOfertaAcademica()])
+                new MenuItemModel($lic->getIdNivelAcademico()->getIdNivelAcademico().$lic->getIdOfertaAcademica(), $lic->getNombreOfertaAcademica(), 'inscritos', ['idOfertaAcademica' => $lic->getIdOfertaAcademica()])
             );
         }
 
@@ -101,7 +102,8 @@ class MenuBuilderSubscriber extends AbstractController implements EventSubscribe
         $event->addItem($seguimiento);
         $event->addItem($pagos);
         $event->addItem($paypal);
-        $event->addItem($catalogos);
+        if($user->hasRole('ROLE_ADMIN'))
+            $event->addItem($catalogos);
 
         $this->activateByRoute(
             $event->getRequest()->get('_route'),

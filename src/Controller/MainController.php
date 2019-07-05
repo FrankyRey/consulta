@@ -59,8 +59,7 @@
 
             return $this->render('inscritos/index.html.twig', [
                 'alumnos' => $alumnos,
-                'expandir' => 'maestria',
-                'activo' => '1mas',
+                'ofertaAcademica' => $ofertaAcademica,
             ]);
         }
     }

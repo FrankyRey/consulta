@@ -67,13 +67,24 @@
 
 {% block javascripts_page %}
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#inscritos').addClass('active treeview menu-open');
-            $('#maestrias').addClass('active');
-            $('#licenciaturas').removeClass('active menu-open');
-            $('#1lic').removeClass('active');
-            $('#2lic').removeClass('active');
-            $('#3lic').removeClass('active');
+        $(document).ready(function( index ){
+            var idNivelAcademico = {{ ofertaAcademica.idNivelAcademico.idNivelAcademico }};
+            var idOfertaAcademica = {{ ofertaAcademica.idOfertaAcademica }};
+            $('#inscritos').children('ul').children('li').each(function() {
+                if($(this).attr('id')==idNivelAcademico){
+                    $(this).children('ul').children('li').each(function() {
+                        if($(this).attr('id')!==idNivelAcademico.toString()+idOfertaAcademica.toString()){
+                            $(this).removeClass('active');
+                        }
+                    });
+                }
+                else {
+                    $(this).removeClass('active menu-open');
+                    $(this).children('ul').children('li').each(function() {
+                        $(this).removeClass('active');
+                    });
+                }
+            });
         });
     </script>
 {% endblock %}
