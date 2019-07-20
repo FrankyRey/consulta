@@ -36,5 +36,123 @@
         $(document).ready(function(){
             $('#alumno').addClass('active');
         });
+
+        var $nivelAcademico = $('#alumno_idNivelAcademico');
+        var $fechaAlta = $('#alumno_fechaAlta');
+        var $ofertaAcademica = $('#alumno_idOfertaAcademica');
+        var $matricula = $('#alumno_matricula');
+        var $apellidoPaterno = $('#alumno_apellidoPaterno');
+        var $nombre = $('#alumno_nombre');
+        var $curp = $('#alumno_curp');
+        var $fechaNacimiento = $('#alumno_fechaNacimiento');
+        var $correoElectronico = $('#alumno_correoElectronico');
+        var $telefonoCelular = $('#alumno_telefonoCelular');
+
+        $nivelAcademico.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected nivelAcademico value.
+            var data = {};
+            data[$nivelAcademico.attr('name')] = $nivelAcademico.val();
+            data[$fechaAlta.attr('name')] = $fechaAlta.val();
+            data[$matricula.attr('name')] = $matricula.val();
+            data[$apellidoPaterno.attr('name')] = $apellidoPaterno.val();
+            data[$nombre.attr('name')] = $nombre.val();
+            data[$curp.attr('name')] = $curp.val();
+            data[$fechaNacimiento.attr('name')] = $fechaNacimiento.val();
+            data[$correoElectronico.attr('name')] = $correoElectronico.val();
+            data[$telefonoCelular.attr('name')] = $telefonoCelular.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    // Replace current position field ...
+                    $('#alumno_idOfertaAcademica').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#alumno_idOfertaAcademica')
+                    );
+
+                    $('#alumno_idGrupo').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#alumno_idGrupo')
+                    );
+
+                    var $ofertaAcademica = $('#alumno_idOfertaAcademica');
+                    var $nivelAcademico = $('#alumno_idNivelAcademico');
+                    var $matricula = $('#alumno_matricula');
+                    var $apellidoPaterno = $('#alumno_apellidoPaterno');
+                    var $nombre = $('#alumno_nombre');
+                    var $curp = $('#alumno_curp');
+                    var $fechaNacimiento = $('#alumno_fechaNacimiento');
+                    var $correoElectronico = $('#alumno_correoElectronico');
+                    var $telefonoCelular = $('#alumno_telefonoCelular');
+
+                    $ofertaAcademica.change(function() {
+                        // ... retrieve the corresponding form.
+                        var $form = $(this).closest('form');
+                        // Simulate form data, but only include the selected ofertaAcademica value.
+                        var data = {};
+                        data[$ofertaAcademica.attr('name')] = $ofertaAcademica.val();
+                        data[$fechaAlta.attr('name')] = $fechaAlta.val();
+                        data[$matricula.attr('name')] = $matricula.val();
+                        data[$apellidoPaterno.attr('name')] = $apellidoPaterno.val();
+                        data[$nombre.attr('name')] = $nombre.val();
+                        data[$curp.attr('name')] = $curp.val();
+                        data[$fechaNacimiento.attr('name')] = $fechaNacimiento.val();
+                        data[$correoElectronico.attr('name')] = $correoElectronico.val();
+                        data[$telefonoCelular.attr('name')] = $telefonoCelular.val();
+
+                        // Submit data via AJAX to the form's action path.
+                        $.ajax({
+                            url : $form.attr('action'),
+                            type: $form.attr('method'),
+                            data : data,
+                            success: function(html) {
+                                // Replace current position field ...
+                                $('#alumno_idGrupo').replaceWith(
+                                    // ... with the returned one from the AJAX response.
+                                    $(html).find('#alumno_idGrupo')
+                                );
+                            // Position field now displays the appropriate positions.
+                            }
+                        });
+                    });
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
+
+        $ofertaAcademica.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected ofertaAcademica value.
+            var data = {};
+            data[$ofertaAcademica.attr('name')] = $ofertaAcademica.val();
+            data[$fechaAlta.attr('name')] = $fechaAlta.val();
+            data[$matricula.attr('name')] = $matricula.val();
+            data[$apellidoPaterno.attr('name')] = $apellidoPaterno.val();
+            data[$nombre.attr('name')] = $nombre.val();
+            data[$curp.attr('name')] = $curp.val();
+            data[$fechaNacimiento.attr('name')] = $fechaNacimiento.val();
+            data[$correoElectronico.attr('name')] = $correoElectronico.val();
+            data[$telefonoCelular.attr('name')] = $telefonoCelular.val();
+            
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    // Replace current position field ...
+                    $('#alumno_idGrupo').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#alumno_idGrupo')
+                    );
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
     </script>
 {% endblock %}

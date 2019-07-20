@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menús y Roles{% endblock %}
+
+{% block page_title %}
+    Detalle Menú Rol
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ menu.idMenu }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Id Html</th>
+                                        <td>{{ menu.idHtml }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Etiqueta Html</th>
+                                        <td>{{ menu.labelHtml }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ruta</th>
+                                        <td>{{ menu.route }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Icono</th>
+                                        <td>{{ menu.icon }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hijo</th>
+                                        <td>{{ menu.child ? 'Yes' : 'No' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Padre</th>
+                                        {% if menu.parent %}
+                                            <td>{{ menu.parent.idHtml ? menu.parent.idHtml : '' }}</td>
+                                        {% else %}
+                                            <td></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr>
+                                        <th>Rol</th>
+                                        <td>{{ menu.idMenuRender.nombreRol }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Orden</th>
+                                        <td>{{ menu.orden }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-info" href="{{ path('menu_index') }}">
+                            <span>
+                                <i class="fas fa-list"></i>
+                            </span>
+                            <span>
+                                Ver todos
+                            </span>
+                        </a>
+    
+                        <a class="btn btn-info" href="{{ path('menu_edit', {'idMenu': menu.idMenu}) }}">
+                            <span>
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span>
+                                Editar
+                            </span>
+                        </a>
+                        <br/>
+                        {{ include('menu/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#catalogos').addClass('active treeview menu-open');
+            $('#menuRender').addClass('active');
+        });
+    </script>
+{% endblock %}

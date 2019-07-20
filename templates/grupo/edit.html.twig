@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Nivel Académico{% endblock %}
+
+{% block page_title %}
+    Editar Nivel Académico
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel-content">
+                        {{ include('grupo/_form.html.twig', {'button_label': 'Actualizar', 'button_icon': 'fas fa-sync-alt'}) }}
+                        <br/>
+                        {{ include('grupo/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#grupos').addClass('active');
+        });
+
+        var $nivelAcademico = $('#grupo_idNivelAcademico');
+		// When nivelAcademico gets selected ...
+		$nivelAcademico.change(function() {
+  			// ... retrieve the corresponding form.
+  			var $semestre = $('#grupo_semestre');
+  			var $form = $(this).closest('form');
+  			// Simulate form data, but only include the selected nivelAcademico value.
+  			var data = {};
+  			data[$nivelAcademico.attr('name')] = $nivelAcademico.val();
+  			data[$semestre.attr('name')] = $semestre.val();
+  			// Submit data via AJAX to the form's action path.
+  			$.ajax({
+    			url : $form.attr('action'),
+    			type: $form.attr('method'),
+    			data : data,
+    			success: function(html) {
+      				// Replace current position field ...
+      				$('#grupo_idOfertaAcademica').replaceWith(
+        				// ... with the returned one from the AJAX response.
+        				$(html).find('#grupo_idOfertaAcademica')
+      				);
+      				// Position field now displays the appropriate positions.
+    			}
+  			});
+		});
+    </script>
+{% endblock %}

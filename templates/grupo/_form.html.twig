@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+	<div class="row">
+		<div class="col-md-12">
+    		<div class="my-custom-class-for-errors">
+        		{{ form_errors(form) }}
+    		</div>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-3">
+    		{{ form_label(form.semestre) }}
+    		{{ form_widget(form.semestre, {'attr':{'min':'1', 'max':'14'}}) }}
+    	</div>
+    	<div class="col-md-3">
+    		{{ form_row(form.grupo) }}
+    	</div>
+    	<div class="col-md-3">
+    		{{ form_label(form.idNivelAcademico, 'Nivel Académico') }}
+    		{{ form_widget(form.idNivelAcademico) }}
+    	</div>
+    	<div class="col-md-3">
+    		{{ form_label(form.idOfertaAcademica, 'Oferta Académica') }}
+    		{{ form_widget(form.idOfertaAcademica) }}
+    	</div>
+    </div>
+	<a class="btn btn-info" href="{{ path('grupo_index') }}">
+        <span>
+            <i class="fas fa-list"></i>
+        </span>
+        <span>
+            Ver todos
+        </span>
+    </a>
+    <button class="btn btn-primary">
+        <span>
+            <i class="{{ button_icon|default('far fa-save') }}"></i>
+        </span>
+        <span>
+            {{ button_label|default('Guardar') }}
+        </span>
+    </button>
+{{ form_end(form) }}

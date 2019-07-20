@@ -10,13 +10,24 @@
 {% endblock %}
 
 {% block page_content %}
+    {% if mensaje %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Error!</strong> {{ mensaje }}.
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-content">
+                        <input id="myInput" type="text" placeholder="Buscar alumno">
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="alumnos">
                                 <thead>
                                     <tr>
                                         <th>Matricula</th>
@@ -24,9 +35,6 @@
                                         <th>Apellido Materno</th>
                                         <th>Nombre</th>
                                         <th>CURP</th>
-                                        <th>Edad</th>
-                                        <th>Fecha de Nacimiento</th>
-                                        <th>Sexo</th>
                                         <th>Correo Electrónico</th>
                                         <th>Telefono Fijo</th>
                                         <th>Telefono Celular</th>
@@ -42,15 +50,12 @@
                                         <td>{{ alumno.apellidoMaterno }}</td>
                                         <td>{{ alumno.nombre }}</td>
                                         <td>{{ alumno.curp }}</td>
-                                        <td>{{ alumno.edad }}</td>
-                                        <td>{{ alumno.fechaNacimiento ? alumno.fechaNacimiento|date('d/m/Y') : '' }}</td>
-                                        <td>{{ alumno.sexo }}</td>
                                         <td>{{ alumno.correoElectronico }}</td>
                                         <td>{{ alumno.telefonoFijo }}</td>
                                         <td>{{ alumno.telefonoCelular }}</td>
                                         <td>{{ alumno.fechaAlta ? alumno.fechaAlta|date('d/m/Y') : '' }}</td>
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('alumno_show', {'matricula': alumno.matricula}) }}">
+                                            <a class="btn btn-info" href="{{ path('alumno_show', {'matricula': alumno.matricula}) }}"  data-toggle="tooltip" data-placement="top" title="Prueba" data-original-title="Tooltip on top">
                                                 <i class="fas fa-search-plus"></i>
                                             </a>
                                             <a class="btn btn-info" href="{{ path('alumno_edit', {'matricula': alumno.matricula}) }}">
@@ -60,7 +65,7 @@
                                     </tr>
                                 {% else %}
                                     <tr>
-                                        <td colspan="13">No se encontraron registros.</td>
+                                        <td colspan="10">No se encontraron registros.</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -72,4 +77,17 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#alumnos tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 {% endblock %}

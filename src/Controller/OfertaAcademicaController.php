@@ -58,7 +58,6 @@ class OfertaAcademicaController extends AbstractController
     {
         return $this->render('oferta_academica/show.html.twig', [
             'oferta_academica' => $ofertaAcademica,
-            'alumno' => $alumno,
         ]);
     }
 

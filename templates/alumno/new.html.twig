@@ -34,5 +34,66 @@
         $(document).ready(function(){
             $('#alumno').addClass('active');
         });
+
+        var $nivelAcademico = $('#alumno_idNivelAcademico');
+        var $fechaAlta = $('#alumno_fechaAlta');
+        var $ofertaAcademica = $('#alumno_idOfertaAcademica');
+
+        $nivelAcademico.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected nivelAcademico value.
+            var data = {};
+            data[$nivelAcademico.attr('name')] = $nivelAcademico.val();
+            data[$fechaAlta.attr('name')] = $fechaAlta.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    // Replace current position field ...
+                    $('#alumno_idOfertaAcademica').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#alumno_idOfertaAcademica')
+                    );
+
+                    $('#alumno_idGrupo').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#alumno_idGrupo')
+                    );
+
+                    var $ofertaAcademica = $('#alumno_idOfertaAcademica');
+                    var $nivelAcademico = $('#alumno_idNivelAcademico');
+
+                    $ofertaAcademica.change(function() {
+                        // ... retrieve the corresponding form.
+                        var $form = $(this).closest('form');
+                        // Simulate form data, but only include the selected ofertaAcademica value.
+                        var data = {};
+                        data[$ofertaAcademica.attr('name')] = $ofertaAcademica.val();
+                        data[$fechaAlta.attr('name')] = $fechaAlta.val();
+                        // Submit data via AJAX to the form's action path.
+                        console.log($form);
+                        console.log(data);
+                        $.ajax({
+                            url : $form.attr('action'),
+                            type: $form.attr('method'),
+                            data : data,
+                            success: function(html) {
+                                console.log('exitoso');
+                                // Replace current position field ...
+                                $('#alumno_idGrupo').replaceWith(
+                                    // ... with the returned one from the AJAX response.
+                                    $(html).find('#alumno_idGrupo')
+                                );
+                            // Position field now displays the appropriate positions.
+                            }
+                        });
+                    });
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
     </script>
 {% endblock %}

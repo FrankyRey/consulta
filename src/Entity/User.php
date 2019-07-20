@@ -19,6 +19,16 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var \MenuRender
+     *
+     * @ORM\ManyToOne(targetEntity="MenuRender")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_menu_render", referencedColumnName="id_menu_render")
+     * })
+     */
+    private $idMenuRender;
+
     public function __construct()
     {
         parent::__construct();
@@ -29,5 +39,17 @@ class User extends BaseUser
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getIdMenuRender(): ?MenuRender
+    {
+        return $this->idMenuRender;
+    }
+
+    public function setIdMenuRender(?MenuRender $idMenuRender): self
+    {
+        $this->idMenuRender = $idMenuRender;
+
+        return $this;
     }
 }

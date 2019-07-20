@@ -1,4 +1,4 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block page_title %}
     Portal Administrativo UDAL Online
@@ -6,4 +6,120 @@
 
 {% block logo_large %}
     <img src="{{ asset('build/images/logo.png') }}" width="100" />
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<canvas id="myChart" width="200" height="200"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<canvas id="pieChart" width="200" height="200"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<canvas id="myChart" width="200" height="200"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts_page %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var pie = document.getElementById('pieChart').getContext('2d');
+	var obj = JSON.parse('{{ ofertaAcademica }}'.replace(/&quot;/g,'"'));
+	var etiquetas = [];
+	var inscritos = [];
+	for (var x in obj) {
+        etiquetas.push(obj[x].nombreOfertaAcademica);
+        inscritos.push(obj[x].inscritos);
+    }
+	var myChart = new Chart(ctx, {
+    	type: 'bar',
+    	data: {
+        	labels: etiquetas,
+        	datasets: [{
+            	label: 'Inscritos: ',
+            	data: inscritos,
+            	backgroundColor: [
+                	'rgba(255, 99, 132, 0.2)',
+                	'rgba(54, 162, 235, 0.2)',
+                	'rgba(255, 206, 86, 0.2)',
+                	'rgba(75, 192, 192, 0.2)',
+                	'rgba(153, 102, 255, 0.2)',
+                	'rgba(255, 159, 64, 0.2)'
+            	],
+            	borderColor: [
+                	'rgba(255, 99, 132, 1)',
+                	'rgba(54, 162, 235, 1)',
+                	'rgba(255, 206, 86, 1)',
+                	'rgba(75, 192, 192, 1)',
+                	'rgba(153, 102, 255, 1)',
+                	'rgba(255, 159, 64, 1)'
+            	],
+            	borderWidth: 1
+        	}]
+    	},
+    	options: {
+        	scales: {
+            	yAxes: [{
+                	ticks: {
+                    	beginAtZero: true
+                	}
+            	}]
+        	}
+    	}
+	});
+
+	var pieChart = new Chart(pie, {
+    	type: 'doughnut',
+    	data: {
+        	labels: etiquetas,
+        	datasets: [{
+            	label: 'Inscritos: ',
+            	data: inscritos,
+            	backgroundColor: [
+                	'rgba(255, 99, 132, 0.2)',
+                	'rgba(54, 162, 235, 0.2)',
+                	'rgba(255, 206, 86, 0.2)',
+                	'rgba(75, 192, 192, 0.2)',
+                	'rgba(153, 102, 255, 0.2)',
+                	'rgba(255, 159, 64, 0.2)'
+            	],
+            	borderColor: [
+                	'rgba(255, 99, 132, 1)',
+                	'rgba(54, 162, 235, 1)',
+                	'rgba(255, 206, 86, 1)',
+                	'rgba(75, 192, 192, 1)',
+                	'rgba(153, 102, 255, 1)',
+                	'rgba(255, 159, 64, 1)'
+            	],
+            	borderWidth: 1
+        	}]
+    	},
+    	options: {
+        	scales: {
+            	yAxes: [{
+                	ticks: {
+                    	beginAtZero: true
+                	}
+            	}]
+        	}
+    	}
+	});
+</script>
 {% endblock %}

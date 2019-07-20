@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menús y Roles{% endblock %}
+
+{% block page_title %}
+    Menús y Roles
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre del Rol</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for menu_render in menu_renders %}
+                                    <tr>
+                                        <td>{{ menu_render.idMenuRender }}</td>
+                                        <td>{{ menu_render.nombreRol }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('menu_render_show', {'idMenuRender': menu_render.idMenuRender}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('menu_render_edit', {'idMenuRender': menu_render.idMenuRender}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('menu_render_new') }}">Agregar nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

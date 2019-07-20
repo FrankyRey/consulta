@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menús y Roles{% endblock %}
+
+{% block page_title %}
+    Detalle Menú Rol
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ menu_render.idMenuRender }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre Rol</th>
+                                        <td>{{ menu_render.nombreRol }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-info" href="{{ path('menu_render_index') }}">
+                            <span>
+                                <i class="fas fa-list"></i>
+                            </span>
+                            <span>
+                                Ver todos
+                            </span>
+                        </a>
+    
+                        <a class="btn btn-info" href="{{ path('menu_render_edit', {'idMenuRender': menu_render.idMenuRender}) }}">
+                            <span>
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span>
+                                Editar
+                            </span>
+                        </a>
+                        <br/>
+                        {{ include('menu_render/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#catalogos').addClass('active treeview menu-open');
+            $('#menuRender').addClass('active');
+        });
+    </script>
+{% endblock %}

@@ -44,6 +44,7 @@ class MenuBuilderSubscriber extends AbstractController implements EventSubscribe
         $catalogos = new MenuItemModel('catalogos', 'Catálogos', [], [], 'fas fa-cogs');
         $maestrias = new MenuItemModel('2', 'Maestrías', [], []);
         $licenciaturas = new MenuItemModel('1', 'Licenciaturas', [], []);
+        $grupos = new MenuItemModel('grupos', 'Grupos', 'grupo_index', [], 'fas fa-users');
         
         if($licenciaturasO)
         {
@@ -98,6 +99,7 @@ class MenuBuilderSubscriber extends AbstractController implements EventSubscribe
         $event->addItem($home);
         $event->addItem($alumno);
         $event->addItem($inscritos);
+        $event->addItem($grupos);
         $event->addItem($expediente);
         $event->addItem($seguimiento);
         $event->addItem($pagos);

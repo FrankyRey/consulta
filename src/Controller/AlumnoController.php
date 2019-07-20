@@ -17,14 +17,17 @@ class AlumnoController extends AbstractController
     /**
      * @Route("/", name="alumno_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $mensaje = $request->query->get('mensaje');
+
         $alumnos = $this->getDoctrine()
             ->getRepository(Alumno::class)
             ->findAll();
 
         return $this->render('alumno/index.html.twig', [
             'alumnos' => $alumnos,
+            'mensaje' => $mensaje,
         ]);
     }
 
@@ -35,6 +38,7 @@ class AlumnoController extends AbstractController
     {
         $alumno = new Alumno();
         $alumno->setIdUser($this->container->get('security.token_storage')->getToken()->getUser());
+        $alumno->setFechaAlta(new \DateTime());
         $form = $this->createForm(AlumnoType::class, $alumno);
         $form->handleRequest($request);
 
@@ -90,9 +94,20 @@ class AlumnoController extends AbstractController
     public function delete(Request $request, Alumno $alumno): Response
     {
         if ($this->isCsrfTokenValid('delete'.$alumno->getMatricula(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($alumno);
-            $entityManager->flush();
+            try{
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($alumno);
+                $entityManager->flush();
+            }
+            catch(\Doctrine\DBAL\DBALException $e){
+                $exception_message = $e->getPrevious()->getCode();
+                if($exception_message==23000){
+                    $mensaje = "No se puede eliminar el alumno, verifique que ya no exista información asociada a este alumno";
+                }
+                return $this->redirectToRoute('alumno_index', [
+                    'mensaje' => $mensaje,
+                ]);
+            }
         }
 
         return $this->redirectToRoute('alumno_index');

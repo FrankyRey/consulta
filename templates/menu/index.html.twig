@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menús{% endblock %}
+
+{% block page_title %}
+    Menús
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Id Html</th>
+                                        <th>Label Html</th>
+                                        <th>Route</th>
+                                        <th>Icon</th>
+                                        <th>Child</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for menu in menus %}
+                                    <tr>
+                                        <td>{{ menu.idMenu }}</td>
+                                        <td>{{ menu.idHtml }}</td>
+                                        <td>{{ menu.labelHtml }}</td>
+                                        <td>{{ menu.route }}</td>
+                                        <td>{{ menu.icon }}</td>
+                                        <td>{{ menu.child ? 'Yes' : 'No' }}</td>
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('menu_show', {'idMenu': menu.idMenu}) }}">
+                                                <i class="fas fa-search-plus"></i>
+                                            </a>
+                                            <a class="btn btn-info" href="{{ path('menu_edit', {'idMenu': menu.idMenu}) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7">No se encontraron registros.</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-primary" href="{{ path('menu_new') }}">Agregar nuevo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

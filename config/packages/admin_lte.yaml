@@ -13,7 +13,7 @@ admin_lte:
         # if activated, the boxed_layout will be deactivated
         fixed_layout: true
         # boxed layout (true) or full-screen (false)
-        boxed_layout: false
+        boxed_layout: true
         # initial collapsed state of the sidebar
         collapsed_sidebar: false
         # whether the logo collapses or not
@@ -51,7 +51,7 @@ admin_lte:
             size: false
 
     knp_menu:
-        enable: false
+        enable: true
         main_menu: adminlte_main
         breadcrumb_menu: false
 

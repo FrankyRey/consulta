@@ -1,5 +1,73 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.matricula) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.apellidoPaterno) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.apellidoMaterno) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.nombre) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_label(form.curp, 'CURP') }}
+            {{ form_widget(form.curp) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.edad) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.fechaNacimiento) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.sexo) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.correoElectronico) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.telefonoFijo) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.telefonoCelular) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.fechaAlta) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_label(form.idNivelAcademico, 'Nivel Académico') }}
+            {{ form_widget(form.idNivelAcademico) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_label(form.idOfertaAcademica, 'Oferta Académica') }}
+            {{ form_widget(form.idOfertaAcademica) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_label(form.idEstatusAlumno, 'Estatus del Alumno') }}
+            {{ form_widget(form.idEstatusAlumno) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_label(form.idGrupo, 'Grupo') }}
+            {{ form_widget(form.idGrupo) }}
+        </div>
+    </div>
+    <hr/>
     <a class="btn btn-info" href="{{ path('alumno_index') }}">
         <span>
             <i class="fas fa-list"></i>

@@ -137,6 +137,16 @@ class Alumno
      */
     private $idEstatusAlumno;
 
+    /**
+     * @var \Grupo
+     *
+     * @ORM\ManyToOne(targetEntity="Grupo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_grupo", referencedColumnName="id_grupo")
+     * })
+     */
+    private $idGrupo;
+
     public function getMatricula(): ?string
     {
         return $this->matricula;
@@ -332,6 +342,18 @@ class Alumno
     public function getNombreCompleto(): ?string
     {
         return $this->apellidoPaterno.' '.$this->apellidoMaterno.' '.$this->nombre;
+    }
+
+    public function getIdGrupo(): ?Grupo
+    {
+        return $this->idGrupo;
+    }
+
+    public function setIdGrupo(?Grupo $idGrupo): self
+    {
+        $this->idGrupo = $idGrupo;
+
+        return $this;
     }
 
 
