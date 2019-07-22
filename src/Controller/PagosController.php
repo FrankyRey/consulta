@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Alumno;
 use App\Entity\Pago;
+use App\Entity\EstatusAlumno;
 
 use App\Form\PagoType;
 
@@ -57,11 +58,18 @@ class PagosController extends AbstractController
         $pago = new Pago();
         $pago->setIdUser($this->container->get('security.token_storage')->getToken()->getUser());
         $pago->setAlumnoMatricula($alumno);
+        $idEstatusAlumno = $this->getDoctrine()
+            ->getRepository(EstatusAlumno::class)
+            ->findOneBy([
+                'idEstatusAlumno' => 4
+            ]);
         $form = $this->createForm(PagoType::class, $pago);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            if($alumno->getIdEstatusAlumno()->getIdEstatusAlumno() < 4 && $pago->getIdConcepto()->getIdConceptoPago() == 1)
+                $alumno->setIdEstatusAlumno($idEstatusAlumno);
             $entityManager->persist($pago);
             $entityManager->flush();
 

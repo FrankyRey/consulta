@@ -59,5 +59,11 @@ class KnpMenuBuilderSubscriber extends AbstractController implements EventSubscr
                 ])->setLabelAttribute('icon', $elemento->getIcon());
             }
         }
+
+        $menu->addChild('paypal', [
+            'route' => 'paypal',
+            'label' => 'Pagar PayPal',
+            'childOptions' => $event->getChildOptions()
+        ])->setLabelAttribute('icon', 'fab fa-paypal');
     }
 }
