@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use App\Entity\Menu;
+use App\Entity\MenuMenuRender;
 
 class KnpMenuBuilderSubscriber extends AbstractController implements EventSubscriberInterface
 {
@@ -25,12 +25,12 @@ class KnpMenuBuilderSubscriber extends AbstractController implements EventSubscr
         $user = $this->getUser();
 
         $elementos = $this->getDoctrine()
-            ->getRepository(Menu::class)
+            ->getRepository(MenuMenuRender::class)
             ->findBy([
-                'idMenuRender' => 2
+                'menuIdMenuRender' => $user->getIdMenuRender()
             ], [
                 'child' => 'ASC',
-                'orden' => 'ASC'
+                'orden' => 'ASC',
             ]);
 
         $menu = $event->getMenu();
@@ -42,28 +42,22 @@ class KnpMenuBuilderSubscriber extends AbstractController implements EventSubscr
 
         foreach ($elementos as $elemento)
         {
-            if($elemento->getChild())
+            if($elemento->getMenuIdMenu()->getChild())
             {
-                $menu[$elemento->getParent()->getIdHtml()]->addChild($elemento->getIdHtml(), [
-                    'route' => $elemento->getRoute(),
-                    'label' => $elemento->getLabelHtml(),
+                $menu[$elemento->getMenuIdMenu()->getParent()->getIdHtml()]->addChild($elemento->getMenuIdMenu()->getIdHtml(), [
+                    'route' => $elemento->getMenuIdMenu()->getRoute(),
+                    'label' => $elemento->getMenuIdMenu()->getLabelHtml(),
                     'childOptions' => $event->getChildOptions()
                 ]);
             }
             else
             {
-                $menu ->addChild($elemento->getIdHtml(), [
-                    'route' => $elemento->getRoute() ? $elemento->getRoute():[],
-                    'label' => $elemento->getLabelHtml(),
+                $menu ->addChild($elemento->getMenuIdMenu()->getIdHtml(), [
+                    'route' => $elemento->getMenuIdMenu()->getRoute() ? $elemento->getMenuIdMenu()->getRoute():[],
+                    'label' => $elemento->getMenuIdMenu()->getLabelHtml(),
                     'childOptions' => $event->getChildOptions()
-                ])->setLabelAttribute('icon', $elemento->getIcon());
+                ])->setLabelAttribute('icon', $elemento->getMenuIdMenu()->getIcon());
             }
         }
-
-        $menu->addChild('paypal', [
-            'route' => 'paypal',
-            'label' => 'Pagar PayPal',
-            'childOptions' => $event->getChildOptions()
-        ])->setLabelAttribute('icon', 'fab fa-paypal');
     }
 }

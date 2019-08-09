@@ -27,12 +27,6 @@ class MenuType extends AbstractType
                 'choice_label' => 'idHtml',
                 'required' => false
             ])
-            ->add('idMenuRender', EntityType::class, [
-                'class' => MenuRender::class,
-                'placeholder' => '--Seleccione--',
-                'choice_label' => 'nombreRol',
-            ])
-            ->add('orden')
         ;
     }
 

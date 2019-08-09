@@ -1,0 +1,12 @@
+<form method="post" action="{{ path('menu_menu_render_delete', {'idMenuMenuRender': menu_menu_render.idMenuMenuRender}) }}" onsubmit="return confirm('¿Realmente desea eliminar?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ menu_menu_render.idMenuMenuRender) }}">
+    <button class="btn btn-danger">
+        <span>
+            <i class="far fa-trash-alt"></i>
+        </span>
+        <span>
+            Eliminar
+        </span>
+    </button>
+</form>

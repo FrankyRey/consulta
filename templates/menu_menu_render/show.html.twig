@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Asignación{% endblock %}
+
+{% block page_title %}
+    Detalle Menú Rol
+{% endblock %}
+
+{% block page_subtitle %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-content">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ menu_menu_render.idMenuMenuRender }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Rol de Menú</th>
+                                        <td>{{ menu_menu_render.menuIdMenuRender.nombreRol }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pantalla</th>
+                                        <td>{{ menu_menu_render.menuIdMenu.labelHtml }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Submenu</th>
+                                        <td>{{ menu_menu_render.child ? 'Si' : 'No' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Orden</th>
+                                        <td>{{ menu_menu_render.orden }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="btn btn-info" href="{{ path('menu_menu_render_index') }}">
+                            <span>
+                                <i class="fas fa-list"></i>
+                            </span>
+                            <span>
+                                Ver todos
+                            </span>
+                        </a>
+    
+                        <a class="btn btn-info" href="{{ path('menu_menu_render_edit', {'idMenuMenuRender': menu_menu_render.idMenuMenuRender}) }}">
+                            <span>
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span>
+                                Editar
+                            </span>
+                        </a>
+                        <br/>
+                        {{ include('menu_menu_render/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_page %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#catalogos').addClass('active treeview menu-open');
+            $('#menuRender').addClass('active');
+        });
+    </script>
+{% endblock %}

@@ -66,23 +66,6 @@ class Menu
      */
     private $parent;
 
-    /**
-     * @var \MenuRender
-     *
-     * @ORM\ManyToOne(targetEntity="MenuRender")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_menu_render", referencedColumnName="id_menu_render")
-     * })
-     */
-    private $idMenuRender;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="orden", type="integer", nullable=false)
-     */
-    private $orden;
-
     public function getIdMenu(): ?int
     {
         return $this->idMenu;
@@ -156,30 +139,6 @@ class Menu
     public function setParent(?Menu $parent): self
     {
         $this->parent = $parent;
-
-        return $this;
-    }
-
-    public function getIdMenuRender(): ?MenuRender
-    {
-        return $this->idMenuRender;
-    }
-
-    public function setIdMenuRender(?MenuRender $idMenuRender): self
-    {
-        $this->idMenuRender = $idMenuRender;
-
-        return $this;
-    }
-
-    public function getOrden(): ?int
-    {
-        return $this->orden;
-    }
-
-    public function setOrden(?int $orden): self
-    {
-        $this->orden = $orden;
 
         return $this;
     }
